@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,18 +19,27 @@
 
         :root {
             --primary: #A3EB17;
+            --secondary: #FF00A0;
             --dark: #000;
             --light: #fff;
             --gray: #1a1a1a;
             --dark-gray: #121212;
+            --accent: #00D4FF;
+            --background: var(--dark);
+            --text: var(--light);
+            --card-bg: rgba(0, 0, 0, 0.4);
+            --header-bg: rgba(0, 0, 0, 0.95);
+            --gradient: linear-gradient(135deg, rgba(163, 235, 23, 0.1) 0%, rgba(0, 0, 0, 0.9) 100%);
+            --layout: 1;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--dark);
-            color: var(--light);
+            background-color: var(--background);
+            color: var(--text);
             overflow-x: hidden;
             line-height: 1.6;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
 
         h1, h2, h3, h4 {
@@ -40,6 +53,86 @@
             margin: 0 auto;
         }
 
+        /* Layout Switcher */
+        .layout-switcher {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 2000;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .layout-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            color: white;
+        }
+
+        .layout-btn:hover {
+            transform: scale(1.1);
+            border-color: white;
+        }
+
+        .layout-btn.active {
+            border-color: white;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Theme Switcher */
+        .theme-switcher {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 2000;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-btn {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.1);
+            border-color: white;
+        }
+
+        .theme-btn.active {
+            border-color: white;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .theme-1 { background: linear-gradient(45deg, #A3EB17, #000); }
+        .theme-2 { background: linear-gradient(45deg, #ffffff, #000000); }
+        .theme-3 { background: linear-gradient(45deg, #00D4FF, #FF00A0); }
+        .theme-4 { background: linear-gradient(45deg, #9C27B0, #FF9800); }
+        .theme-5 { background: linear-gradient(45deg, #F44336, #000000); }
+        .theme-6 { background: linear-gradient(45deg, #4CAF50, #000000); }
+
         /* Header & Navigation */
         header {
             position: fixed;
@@ -48,10 +141,10 @@
             z-index: 1000;
             padding: 20px 0;
             transition: background 0.3s ease;
+            background: var(--header-bg);
         }
 
         header.scrolled {
-            background: rgba(0, 0, 0, 0.95);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
         }
@@ -77,7 +170,7 @@
         }
 
         .nav-links a {
-            color: var(--light);
+            color: var(--text);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
@@ -107,12 +200,12 @@
             display: none;
             background: none;
             border: none;
-            color: var(--light);
+            color: var(--text);
             font-size: 24px;
             cursor: pointer;
         }
 
-        /* Hero Section */
+        /* Hero Section - Layout 1 (Default) */
         .hero {
             height: 100vh;
             display: flex;
@@ -128,7 +221,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(163, 235, 23, 0.1) 0%, rgba(0, 0, 0, 0.9) 100%);
+            background: var(--gradient);
             z-index: -1;
         }
 
@@ -181,7 +274,7 @@
             background: transparent;
             color: var(--primary);
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(163, 235, 23, 0.2);
+            box-shadow: 0 10px 20px var(--primary);
         }
 
         .btn-outline {
@@ -195,10 +288,102 @@
             color: var(--dark);
         }
 
+        /* Hero Section - Layout 2 */
+        .layout-2 .hero {
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .layout-2 .hero-content {
+            max-width: 800px;
+        }
+
+        .layout-2 .hero-bg {
+            background: url('https://images.unsplash.com/photo-1459749411175-04bf5292ceea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+        }
+
+        .layout-2 .hero h1 {
+            font-size: 3.5rem;
+        }
+
+        /* Hero Section - Layout 3 */
+        .layout-3 .hero {
+            background: linear-gradient(45deg, var(--dark), var(--gray));
+        }
+
+        .layout-3 .hero-bg {
+            opacity: 0.2;
+        }
+
+        .layout-3 .hero-content {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Hero Section - Layout 4 */
+        .layout-4 .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 70%);
+        }
+
+        .layout-4 .hero-bg {
+            display: none;
+        }
+
+        .layout-4 .hero h1 {
+            color: var(--light);
+        }
+
+        .layout-4 .hero h1 span {
+            color: var(--dark);
+        }
+
+        /* Animated Play Button in Hero */
+        .hero-play-btn {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            animation: pulse 2s infinite;
+        }
+
+        .hero-play-btn i {
+            color: var(--dark);
+            font-size: 24px;
+        }
+
         /* Services Section */
         .services {
             padding: 100px 0;
             background: var(--gray);
+        }
+
+        .layout-2 .services {
+            background: var(--dark-gray);
+        }
+
+        .layout-3 .services {
+            background: linear-gradient(to bottom, var(--dark), var(--gray));
+        }
+
+        .layout-4 .services {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .layout-4 .services .section-title h2 {
+            color: var(--dark);
         }
 
         .section-title {
@@ -231,13 +416,35 @@
         }
 
         .service-card {
-            background: rgba(0, 0, 0, 0.4);
+            background: var(--card-bg);
             border-radius: 10px;
             padding: 30px;
             text-align: center;
             transition: all 0.3s ease;
             opacity: 0;
             transform: translateY(50px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .layout-4 .service-card {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark);
+        }
+
+        .service-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(163, 235, 23, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .service-card:hover:before {
+            left: 100%;
         }
 
         .service-card.show {
@@ -267,6 +474,18 @@
             background: var(--dark-gray);
         }
 
+        .layout-2 .portfolio {
+            background: var(--gray);
+        }
+
+        .layout-3 .portfolio {
+            background: linear-gradient(to bottom, var(--gray), var(--dark));
+        }
+
+        .layout-4 .portfolio {
+            background: var(--dark);
+        }
+
         .filter-buttons {
             display: flex;
             justify-content: center;
@@ -278,7 +497,7 @@
             padding: 10px 20px;
             margin: 5px 10px;
             background: transparent;
-            color: var(--light);
+            color: var(--text);
             border: 2px solid var(--primary);
             border-radius: 30px;
             cursor: pointer;
@@ -354,6 +573,32 @@
             padding: 0 20px;
         }
 
+        /* Play icon on portfolio items */
+        .portfolio-play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-play-icon {
+            opacity: 1;
+        }
+
+        .portfolio-play-icon i {
+            color: var(--dark);
+            font-size: 20px;
+        }
+
         /* Media Player */
         .media-player {
             position: fixed;
@@ -391,7 +636,7 @@
         .close-player {
             background: none;
             border: none;
-            color: var(--light);
+            color: var(--text);
             font-size: 1.2rem;
             cursor: pointer;
         }
@@ -412,10 +657,51 @@
             color: var(--primary);
         }
 
+        /* Music Visualization */
+        .visualizer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 40px;
+            margin-top: 10px;
+        }
+
+        .bar {
+            width: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+            animation-duration: 1.3s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            opacity: 0.7;
+        }
+
+        @keyframes visualizer {
+            0% { height: 5px; }
+            100% { height: 100%; }
+        }
+
         /* About Section */
         .about {
             padding: 100px 0;
             background: var(--gray);
+        }
+
+        .layout-2 .about {
+            background: var(--dark-gray);
+        }
+
+        .layout-3 .about {
+            background: linear-gradient(to bottom, var(--dark), var(--gray));
+        }
+
+        .layout-4 .about {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .layout-4 .about .section-title h2 {
+            color: var(--dark);
         }
 
         .about-content {
@@ -425,6 +711,15 @@
             align-items: center;
         }
 
+        .layout-2 .about-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
+        .layout-3 .about-content {
+            grid-template-columns: 1fr 1fr;
+        }
+
         .about-img {
             border-radius: 10px;
             overflow: hidden;
@@ -432,6 +727,11 @@
             opacity: 0;
             transform: translateX(-50px);
             transition: all 0.8s ease;
+        }
+
+        .layout-2 .about-img {
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .about-img.show {
@@ -464,64 +764,194 @@
             margin-bottom: 20px;
         }
 
-        /* Team Section */
-        .team {
-            padding: 100px 0;
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
             background: var(--dark-gray);
+            text-align: center;
         }
 
-        .team-grid {
+        .layout-2 .stats {
+            background: var(--gray);
+        }
+
+        .layout-3 .stats {
+            background: linear-gradient(to bottom, var(--gray), var(--dark));
+        }
+
+        .layout-4 .stats {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 30px;
         }
 
-        .team-member {
-            text-align: center;
+        .stat-item {
+            padding: 30px;
             opacity: 0;
             transform: translateY(50px);
             transition: all 0.5s ease;
         }
 
-        .team-member.show {
+        .stat-item.show {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .member-img {
-            width: 200px;
-            height: 200px;
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .layout-4 .stat-number {
+            color: var(--dark);
+        }
+
+        .stat-text {
+            font-size: 1.2rem;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 100px 0;
+            background: var(--gray);
+        }
+
+        .layout-2 .process {
+            background: var(--dark-gray);
+        }
+
+        .layout-3 .process {
+            background: linear-gradient(to bottom, var(--dark), var(--gray));
+        }
+
+        .layout-4 .process {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .layout-4 .process .section-title h2 {
+            color: var(--dark);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .process-step {
+            width: 22%;
+            text-align: center;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.5s ease;
+        }
+
+        .process-step.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .process-step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -40%;
+            width: 80%;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
-            overflow: hidden;
+            background: var(--primary);
+            color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: 800;
             margin: 0 auto 20px;
-            border: 3px solid var(--primary);
         }
 
-        .member-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .team-member:hover .member-img img {
-            transform: scale(1.1);
-        }
-
-        .member-info h3 {
+        .step-title {
             font-size: 1.5rem;
-            margin-bottom: 5px;
+            margin-bottom: 15px;
             color: var(--primary);
         }
 
-        .member-info p {
-            color: #ccc;
+        /* Clients Section */
+        .clients {
+            padding: 80px 0;
+            background: var(--dark-gray);
+            text-align: center;
         }
 
-        /* Testimonials */
+        .layout-2 .clients {
+            background: var(--gray);
+        }
+
+        .layout-3 .clients {
+            background: linear-gradient(to bottom, var(--gray), var(--dark));
+        }
+
+        .layout-4 .clients {
+            background: var(--dark);
+        }
+
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 40px;
+            align-items: center;
+        }
+
+        .client-logo {
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            filter: grayscale(100%);
+            max-width: 150px;
+            margin: 0 auto;
+        }
+
+        .client-logo:hover {
+            opacity: 1;
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
+        /* Testimonials Section */
         .testimonials {
             padding: 100px 0;
             background: var(--gray);
+        }
+
+        .layout-2 .testimonials {
+            background: var(--dark-gray);
+        }
+
+        .layout-3 .testimonials {
+            background: linear-gradient(to bottom, var(--dark), var(--gray));
+        }
+
+        .layout-4 .testimonials {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .layout-4 .testimonials .section-title h2 {
+            color: var(--dark);
         }
 
         .testimonial-slider {
@@ -586,10 +1016,244 @@
             color: #ccc;
         }
 
+        .layout-4 .testimonial-role {
+            color: #666;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 100px 0;
+            background: var(--dark-gray);
+        }
+
+        .layout-2 .team {
+            background: var(--gray);
+        }
+
+        .layout-3 .team {
+            background: linear-gradient(to bottom, var(--gray), var(--dark));
+        }
+
+        .layout-4 .team {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .layout-4 .team .section-title h2 {
+            color: var(--dark);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .team-member {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.5s ease;
+        }
+
+        .team-member.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .member-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 3px solid var(--primary);
+            position: relative;
+        }
+
+        .member-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .team-member:hover .member-img img {
+            transform: scale(1.1);
+        }
+
+        .member-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .member-info p {
+            color: #ccc;
+        }
+
+        .layout-4 .member-info p {
+            color: #666;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 100px 0;
+            background: var(--gray);
+        }
+
+        .layout-2 .faq {
+            background: var(--dark-gray);
+        }
+
+        .layout-3 .faq {
+            background: linear-gradient(to bottom, var(--dark), var(--gray));
+        }
+
+        .layout-4 .faq {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .layout-4 .faq .section-title h2 {
+            color: var(--dark);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--card-bg);
+        }
+
+        .layout-4 .faq-item {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 20px 20px;
+        }
+
+        /* Blog Section */
+        .blog {
+            padding: 100px 0;
+            background: var(--dark-gray);
+        }
+
+        .layout-2 .blog {
+            background: var(--gray);
+        }
+
+        .layout-3 .blog {
+            background: linear-gradient(to bottom, var(--gray), var(--dark));
+        }
+
+        .layout-4 .blog {
+            background: var(--dark);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-post {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.5s ease;
+        }
+
+        .layout-4 .blog-post {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .blog-post.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .blog-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .blog-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .blog-post:hover .blog-img img {
+            transform: scale(1.1);
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        .blog-date {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .blog-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .blog-excerpt {
+            margin-bottom: 15px;
+        }
+
         /* Contact Section */
         .contact {
             padding: 100px 0;
+            background: var(--gray);
+        }
+
+        .layout-2 .contact {
             background: var(--dark-gray);
+        }
+
+        .layout-3 .contact {
+            background: linear-gradient(to bottom, var(--dark), var(--gray));
+        }
+
+        .layout-4 .contact {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .layout-4 .contact .section-title h2 {
+            color: var(--dark);
         }
 
         .contact-content {
@@ -598,10 +1262,19 @@
             gap: 50px;
         }
 
+        .layout-2 .contact-content {
+            grid-template-columns: 1fr;
+        }
+
+        .layout-3 .contact-content {
+            grid-template-columns: 1fr 1fr;
+        }
+
         .contact-info {
             opacity: 0;
             transform: translateX(-50px);
             transition: all 0.8s ease;
+            position: relative;
         }
 
         .contact-info.show {
@@ -661,8 +1334,14 @@
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 5px;
-            color: var(--light);
+            color: var(--text);
             font-family: 'Poppins', sans-serif;
+        }
+
+        .layout-4 .form-control {
+            background: rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            color: var(--dark);
         }
 
         textarea.form-control {
@@ -677,25 +1356,56 @@
             text-align: center;
         }
 
+        .layout-2 footer {
+            background: var(--dark-gray);
+        }
+
+        .layout-3 footer {
+            background: linear-gradient(to bottom, var(--gray), var(--dark));
+        }
+
+        .layout-4 footer {
+            background: var(--dark);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+
+        .layout-2 .footer-content, .layout-3 .footer-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
         .footer-logo img {
             height: 40px;
             margin-bottom: 20px;
         }
 
-        .footer-links {
-            display: flex;
-            justify-content: center;
+        .footer-about {
+            margin-bottom: 20px;
+        }
+
+        .footer-links h3, .footer-newsletter h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .footer-links ul {
             list-style: none;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
         }
 
         .footer-links li {
-            margin: 0 15px;
+            margin-bottom: 10px;
         }
 
         .footer-links a {
-            color: var(--light);
+            color: var(--text);
             text-decoration: none;
             transition: color 0.3s ease;
         }
@@ -704,12 +1414,47 @@
             color: var(--primary);
         }
 
+        .newsletter-form {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px 0 0 5px;
+            color: var(--text);
+        }
+
+        .layout-4 .newsletter-input {
+            background: rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            color: var(--dark);
+        }
+
+        .newsletter-btn {
+            padding: 10px 20px;
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            font-size: 0.9rem;
+        }
+
         .social-icons {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .social-icons a {
-            color: var(--light);
+            color: var(--text);
             font-size: 1.5rem;
             margin: 0 10px;
             transition: color 0.3s ease;
@@ -717,12 +1462,6 @@
 
         .social-icons a:hover {
             color: var(--primary);
-        }
-
-        .copyright {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 20px;
-            font-size: 0.9rem;
         }
 
         /* Animations */
@@ -740,17 +1479,55 @@
         @keyframes pulse {
             0% {
                 transform: scale(1);
+                box-shadow: 0 0 0 0 var(--primary);
             }
-            50% {
+            70% {
                 transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(163, 235, 23, 0);
             }
             100% {
                 transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(163, 235, 23, 0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
             }
         }
 
         .pulse {
             animation: pulse 2s infinite;
+        }
+
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Particle Animation */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 8s infinite linear;
         }
 
         /* Media Queries */
@@ -772,9 +1549,39 @@
                 right: 10px;
                 bottom: 10px;
             }
+            
+            .process-step {
+                width: 48%;
+                margin-bottom: 40px;
+            }
+            
+            .process-step:not(:last-child):after {
+                display: none;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
         }
 
         @media (max-width: 768px) {
+            .layout-switcher, .theme-switcher {
+                top: 5px;
+                padding: 8px;
+            }
+            
+            .layout-btn {
+                width: 25px;
+                height: 25px;
+                font-size: 10px;
+            }
+            
+            .theme-btn {
+                width: 20px;
+                height: 20px;
+            }
+            
             .nav-links {
                 position: fixed;
                 top: 0;
@@ -828,10 +1635,35 @@
             .media-player.active {
                 transform: translateY(0);
             }
+            
+            .process-step {
+                width: 100%;
+            }
         }
     </style>
 </head>
-<body>
+<body class="layout-1">
+    <!-- Layout Switcher -->
+    <div class="layout-switcher">
+        <div class="layout-btn active" data-layout="1">1</div>
+        <div class="layout-btn" data-layout="2">2</div>
+        <div class="layout-btn" data-layout="3">3</div>
+        <div class="layout-btn" data-layout="4">4</div>
+    </div>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <div class="theme-btn theme-1 active" data-theme="1"></div>
+        <div class="theme-btn theme-2" data-theme="2"></div>
+        <div class="theme-btn theme-3" data-theme="3"></div>
+        <div class="theme-btn theme-4" data-theme="4"></div>
+        <div class="theme-btn theme-5" data-theme="5"></div>
+        <div class="theme-btn theme-6" data-theme="6"></div>
+    </div>
+
+    <!-- Particle Animation -->
+    <div class="particles" id="particles"></div>
+
     <!-- Header & Navigation -->
     <header>
         <div class="container header-container">
@@ -846,7 +1678,9 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#process">Process</a></li>
                 <li><a href="#team">Team</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -862,6 +1696,9 @@
                 <a href="#contact" class="btn">Get in Touch</a>
                 <a href="#portfolio" class="btn btn-outline">View Our Work</a>
             </div>
+        </div>
+        <div class="hero-play-btn pulse" id="heroPlayBtn">
+            <i class="fas fa-play"></i>
         </div>
     </section>
 
@@ -893,6 +1730,27 @@
                     <h3>Photography</h3>
                     <p>Captivating images that communicate your brand's essence and leave a lasting impression.</p>
                 </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Visual Effects</h3>
+                    <p>Stunning visual effects that bring your vision to life with cutting-edge technology.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-podcast"></i>
+                    </div>
+                    <h3>Audio Post-Production</h3>
+                    <p>Professional audio editing, mixing, and mastering for your videos and music projects.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3>Motion Graphics</h3>
+                    <p>Dynamic animations and graphics that enhance your visual storytelling.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -908,6 +1766,7 @@
                 <button class="filter-btn" data-filter="video">Videos</button>
                 <button class="filter-btn" data-filter="music">Music</button>
                 <button class="filter-btn" data-filter="image">Images</button>
+                <button class="filter-btn" data-filter="vfx">VFX</button>
             </div>
             <div class="portfolio-grid">
                 <div class="portfolio-item" data-category="video">
@@ -917,6 +1776,9 @@
                         <p>High-energy music video for emerging artist</p>
                         <button class="btn play-btn" data-type="video" data-src="https://www.youtube.com/embed/jfKfPfyJRdk">Play Video</button>
                     </div>
+                    <div class="portfolio-play-icon">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
                 <div class="portfolio-item" data-category="music">
                     <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Music Production" class="portfolio-img">
@@ -924,6 +1786,9 @@
                         <h3>Album Production</h3>
                         <p>Full album production for indie band</p>
                         <button class="btn play-btn" data-type="audio" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">Play Audio</button>
+                    </div>
+                    <div class="portfolio-play-icon">
+                        <i class="fas fa-play"></i>
                     </div>
                 </div>
                 <div class="portfolio-item" data-category="image">
@@ -940,6 +1805,9 @@
                         <p>30-second commercial for lifestyle brand</p>
                         <button class="btn play-btn" data-type="video" data-src="https://www.youtube.com/embed/jfKfPfyJRdk">Play Video</button>
                     </div>
+                    <div class="portfolio-play-icon">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
                 <div class="portfolio-item" data-category="music">
                     <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Music Production" class="portfolio-img">
@@ -948,12 +1816,19 @@
                         <p>Original soundtrack for independent film</p>
                         <button class="btn play-btn" data-type="audio" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">Play Audio</button>
                     </div>
+                    <div class="portfolio-play-icon">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
-                <div class="portfolio-item" data-category="image">
-                    <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Brand Photography" class="portfolio-img">
+                <div class="portfolio-item" data-category="vfx">
+                    <img src="https://images.unsplash.com/photo-1558603666-13c2d9c2c6e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="VFX Work" class="portfolio-img">
                     <div class="portfolio-overlay">
-                        <h3>Brand Story</h3>
-                        <p>Visual brand story for tech startup</p>
+                        <h3>Visual Effects</h3>
+                        <p>CGI and visual effects for sci-fi short film</p>
+                        <button class="btn play-btn" data-type="video" data-src="https://www.youtube.com/embed/jfKfPfyJRdk">Play Video</button>
+                    </div>
+                    <div class="portfolio-play-icon">
+                        <i class="fas fa-play"></i>
                     </div>
                 </div>
             </div>
@@ -970,6 +1845,18 @@
             <!-- Content will be added dynamically -->
         </div>
         <div class="now-playing" id="nowPlaying"></div>
+        <div class="visualizer" id="visualizer">
+            <div class="bar" style="animation-name: visualizer; animation-delay: 0s;"></div>
+            <div class="bar" style="animation-name: visualizer; animation-delay: 0.1s;"></div>
+            <div class="bar" style="animation-name: visualizer; animation-delay: 0.2s;"></div>
+            <div class="bar" style="animation-name: visualizer; animation-delay: 0.3s;"></div>
+            <div class="bar" style="animation-name: visualizer; animation-delay: 0.4s;"></div>
+            <div class="bar" style="animation-name: visualizer; animation-delay: 0.5s;"></div>
+            <div class="bar" style="animation-name: visualizer; animation-delay: 0.6s;"></div>
+            <div class="bar" style="animation-name: visualizer; animation-delay: 0.7s;"></div>
+            <div class="bar" style="animation-name: visualizer; animation-delay: 0.8s;"></div>
+            <div class="bar" style="animation-name: visualizer; animation-delay: 0.9s;"></div>
+        </div>
     </div>
 
     <!-- About Section -->
@@ -986,7 +1873,119 @@
                     <h2>We Create Experiences</h2>
                     <p>Pitamaas Lab was founded with a simple mission: to create exceptional visual and auditory experiences that resonate with audiences. Our team of talented professionals brings together expertise in film, music, and photography to deliver content that stands out.</p>
                     <p>We believe in the power of storytelling and the impact of quality production. Whether it's a music video, commercial, album, or photo series, we approach each project with creativity, technical excellence, and attention to detail.</p>
-                    <p>Our studio is equipped with state-of-the-art technology, but it's our passion for innovation and collaboration that truly sets us apart.</p>
+                    <p>Our studio is equipped with state-of-the-art technology, but it's our passion for innovation and collaboration that truly sets us apart. We've worked with major brands, independent artists, and everyone in between.</p>
+                    <div class="stats">
+                        <div class="stat">
+                            <h3>250+</h3>
+                            <p>Projects Completed</p>
+                        </div>
+                        <div class="stat">
+                            <h3>50+</h3>
+                            <p>Happy Clients</p>
+                        </div>
+                        <div class="stat">
+                            <h3>15+</h3>
+                            <p>Awards Won</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="250">0</div>
+                    <div class="stat-text">Projects Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="50">0</div>
+                    <div class="stat-text">Happy Clients</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="15">0</div>
+                    <div class="stat-text">Awards Won</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="10">0</div>
+                    <div class="stat-text">Years Experience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Process</h2>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Concept</h3>
+                    <p>We brainstorm ideas and develop a creative concept that aligns with your vision.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Planning</h3>
+                    <p>We create a detailed plan including storyboards, shot lists, and production schedules.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Production</h3>
+                    <p>Our team executes the plan with professional equipment and expert techniques.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Delivery</h3>
+                    <p>We deliver the final product that exceeds your expectations and achieves your goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section class="clients">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Clients</h2>
+            </div>
+            <div class="clients-grid">
+                <img src="https://via.placeholder.com/150x80/333/ffffff?text=Client+1" alt="Client 1" class="client-logo">
+                <img src="https://via.placeholder.com/150x80/333/ffffff?text=Client+2" alt="Client 2" class="client-logo">
+                <img src="https://via.placeholder.com/150x80/333/ffffff?text=Client+3" alt="Client 3" class="client-logo">
+                <img src="https://via.placeholder.com/150x80/333/ffffff?text=Client+4" alt="Client 4" class="client-logo">
+                <img src="https://via.placeholder.com/150x80/333/ffffff?text=Client+5" alt="Client 5" class="client-logo">
+                <img src="https://via.placeholder.com/150x80/333/ffffff?text=Client+6" alt="Client 6" class="client-logo">
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Client Testimonials</h2>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial active">
+                    <p class="testimonial-text">Pitamaas Lab transformed our vision into a stunning reality. Their attention to detail and creative approach exceeded our expectations. The final product was exactly what we envisioned and more.</p>
+                    <p class="testimonial-author">James Wilson</p>
+                    <p class="testimonial-role">Marketing Director, Nova Tech</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">The music production quality was exceptional. They perfectly captured the essence of our brand and created something truly unique. We've received countless compliments on the audio quality.</p>
+                    <p class="testimonial-author">Emily Roberts</p>
+                    <p class="testimonial-role">CEO, SoundVibes Records</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">Working with Pitamaas Lab was a game-changer for our campaign. Their video production skills helped us reach a much wider audience and significantly increased engagement with our brand.</p>
+                    <p class="testimonial-author">David Kim</p>
+                    <p class="testimonial-role">Brand Manager, Urban Apparel</p>
                 </div>
             </div>
         </div>
@@ -996,7 +1995,7 @@
     <section class="team" id="team">
         <div class="container">
             <div class="section-title">
-                <h2>Our Team</h2>
+                <h2>Our Creative Team</h2>
             </div>
             <div class="team-grid">
                 <div class="team-member">
@@ -1006,6 +2005,11 @@
                     <div class="member-info">
                         <h3>Alex Johnson</h3>
                         <p>Creative Director</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
                     </div>
                 </div>
                 <div class="team-member">
@@ -1015,6 +2019,11 @@
                     <div class="member-info">
                         <h3>Sarah Williams</h3>
                         <p>Head of Production</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
                     </div>
                 </div>
                 <div class="team-member">
@@ -1024,42 +2033,117 @@
                     <div class="member-info">
                         <h3>Michael Chen</h3>
                         <p>Sound Engineer</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
                     </div>
                 </div>
                 <div class="team-member">
                     <div class="member-img">
-                        <img src="https://images.unsplash.com/photo-1567532939604-b6b5b0db1604?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt>Visual Artist</p>
+                        <img src="https://images.unsplash.com/photo-1567532939604-b6b5b0db1604?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Visual Artist">
                     </div>
                     <div class="member-info">
                         <h3>Jessica Martinez</h3>
                         <p>Visual Artist</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials">
+    <!-- FAQ Section -->
+    <section class="faq">
         <div class="container">
             <div class="section-title">
-                <h2>Client Testimonials</h2>
+                <h2>Frequently Asked Questions</h2>
             </div>
-            <div class="testimonial-slider">
-                <div class="testimonial active">
-                    <p class="testimonial-text">Pitamaas Lab transformed our vision into a stunning reality. Their attention to detail and creative approach exceeded our expectations.</p>
-                    <p class="testimonial-author">James Wilson</p>
-                    <p class="testimonial-role">Marketing Director, Nova Tech</p>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How long does a typical project take?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The timeline varies depending on the scope and complexity of the project. A simple video production might take 2-3 weeks, while a more complex project with visual effects could take 2-3 months. We'll provide a detailed timeline during our initial consultation.</p>
+                    </div>
                 </div>
-                <div class="testimonial">
-                    <p class="testimonial-text">The music production quality was exceptional. They perfectly captured the essence of our brand and created something truly unique.</p>
-                    <p class="testimonial-author">Emily Roberts</p>
-                    <p class="testimonial-role">CEO, SoundVibes Records</p>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What is your pricing structure?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer customized pricing based on the specific requirements of each project. Factors that influence cost include project complexity, equipment needed, crew size, and post-production requirements. We provide detailed quotes after understanding your needs.</p>
+                    </div>
                 </div>
-                <div class="testimonial">
-                    <p class="testimonial-text">Working with Pitamaas Lab was a game-changer for our campaign. Their video production skills helped us reach a much wider audience.</p>
-                    <p class="testimonial-author">David Kim</p>
-                    <p class="testimonial-role">Brand Manager, Urban Apparel</p>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you work with remote clients?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we frequently work with clients from around the world. We use modern collaboration tools to ensure smooth communication throughout the project, regardless of your location.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What file formats do you deliver?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We deliver in all standard formats suitable for your intended use (web, broadcast, social media, etc.). Common formats include MP4, MOV, ProRes, and DNxHD for video, and WAV, MP3, and AIFF for audio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog">
+        <div class="container">
+            <div class="section-title">
+                <h2>Latest from Our Blog</h2>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-post">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Blog Post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">June 15, 2023</div>
+                        <h3 class="blog-title">The Future of Video Production in 2023</h3>
+                        <p class="blog-excerpt">Explore the latest trends and technologies shaping the video production industry this year.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+                <div class="blog-post">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Blog Post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">May 28, 2023</div>
+                        <h3 class="blog-title">How Music Enhances Visual Storytelling</h3>
+                        <p class="blog-excerpt">Discover the psychological impact of music in video content and how to choose the right soundtrack.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+                <div class="blog-post">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Blog Post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">April 12, 2023</div>
+                        <h3 class="blog-title">Essential Photography Tips for Beginners</h3>
+                        <p class="blog-excerpt">Learn fundamental techniques to improve your photography skills, from composition to lighting.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1081,6 +2165,9 @@
                         <li><i class="fas fa-envelope"></i> info@pitamaaslab.com</li>
                         <li><i class="fas fa-clock"></i> Monday-Friday: 9AM - 6PM</li>
                     </ul>
+                    <div class="map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343008!2d-74.00425872426637!3d40.74076987932881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bf5c8eef01%3A0x41c84c6d4ed8b3d2!2sMadison%20Square%20Garden!5e0!3m2!1sen!2sus!4v1689958100351!5m2!1sen!2sus" width="100%" height="200" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
                 </div>
                 <div class="contact-form">
                     <form>
@@ -1110,31 +2197,212 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-logo">
-                <img src="https://www.pitamaas.com/logo-dark-mobile.png" alt="Pitamaas Lab">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="https://www.pitamaas.com/logo-dark-mobile.png" alt="Pitamaas Lab">
+                    </div>
+                    <p class="footer-about">Pitamaas Lab is a creative production studio specializing in high-quality video, music, and image content that captivates audiences.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Video Production</a></li>
+                        <li><a href="#">Music Production</a></li>
+                        <li><a href="#">Photography</a></li>
+                        <li><a href="#">Visual Effects</a></li>
+                        <li><a href="#">Audio Post-Production</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter to get updates on our latest projects and offers.</p>
+                    <div class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Your Email">
+                        <button class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
             </div>
-            <ul class="footer-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#team">Team</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-                <a href="#"><i class="fab fa-spotify"></i></a>
-            </div>
-            <div class="copyright">
+            <div class="footer-bottom">
                 <p>&copy; 2023 Pitamaas Lab. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Layout Switching Functionality
+        const layoutButtons = document.querySelectorAll('.layout-btn');
+        
+        layoutButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const layout = button.getAttribute('data-layout');
+                
+                // Remove active class from all buttons
+                layoutButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Remove all layout classes from body
+                document.body.classList.remove('layout-1', 'layout-2', 'layout-3', 'layout-4');
+                
+                // Add the selected layout class
+                document.body.classList.add(`layout-${layout}`);
+            });
+        });
+
+        // Theme Switching Functionality
+        const themeButtons = document.querySelectorAll('.theme-btn');
+        
+        themeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const theme = button.getAttribute('data-theme');
+                
+                // Remove active class from all buttons
+                themeButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Change theme based on selection
+                switch(theme) {
+                    case '1': // Default (Black and #A3EB17)
+                        document.documentElement.style.setProperty('--primary', '#A3EB17');
+                        document.documentElement.style.setProperty('--secondary', '#FF00A0');
+                        document.documentElement.style.setProperty('--dark', '#000');
+                        document.documentElement.style.setProperty('--light', '#fff');
+                        document.documentElement.style.setProperty('--gray', '#1a1a1a');
+                        document.documentElement.style.setProperty('--dark-gray', '#121212');
+                        document.documentElement.style.setProperty('--accent', '#00D4FF');
+                        document.documentElement.style.setProperty('--background', 'var(--dark)');
+                        document.documentElement.style.setProperty('--text', 'var(--light)');
+                        document.documentElement.style.setProperty('--card-bg', 'rgba(0, 0, 0, 0.4)');
+                        document.documentElement.style.setProperty('--header-bg', 'rgba(0, 0, 0, 0.95)');
+                        document.documentElement.style.setProperty('--gradient', 'linear-gradient(135deg, rgba(163, 235, 23, 0.1) 0%, rgba(0, 0, 0, 0.9) 100%)');
+                        break;
+                    case '2': // White and Black
+                        document.documentElement.style.setProperty('--primary', '#000000');
+                        document.documentElement.style.setProperty('--secondary', '#666666');
+                        document.documentElement.style.setProperty('--dark', '#ffffff');
+                        document.documentElement.style.setProperty('--light', '#000000');
+                        document.documentElement.style.setProperty('--gray', '#f5f5f5');
+                        document.documentElement.style.setProperty('--dark-gray', '#e0e0e0');
+                        document.documentElement.style.setProperty('--accent', '#333333');
+                        document.documentElement.style.setProperty('--background', 'var(--dark)');
+                        document.documentElement.style.setProperty('--text', 'var(--light)');
+                        document.documentElement.style.setProperty('--card-bg', 'rgba(255, 255, 255, 0.8)');
+                        document.documentElement.style.setProperty('--header-bg', 'rgba(255, 255, 255, 0.95)');
+                        document.documentElement.style.setProperty('--gradient', 'linear-gradient(135deg, rgba(0, 0, 0, 0.1) 0%, rgba(255, 255, 255, 0.9) 100%)');
+                        break;
+                    case '3': // Neon Blue and Pink
+                        document.documentElement.style.setProperty('--primary', '#00D4FF');
+                        document.documentElement.style.setProperty('--secondary', '#FF00A0');
+                        document.documentElement.style.setProperty('--dark', '#0a0a1a');
+                        document.documentElement.style.setProperty('--light', '#ffffff');
+                        document.documentElement.style.setProperty('--gray', '#1a1a2a');
+                        document.documentElement.style.setProperty('--dark-gray', '#121222');
+                        document.documentElement.style.setProperty('--accent', '#FF00A0');
+                        document.documentElement.style.setProperty('--background', 'var(--dark)');
+                        document.documentElement.style.setProperty('--text', 'var(--light)');
+                        document.documentElement.style.setProperty('--card-bg', 'rgba(0, 212, 255, 0.1)');
+                        document.documentElement.style.setProperty('--header-bg', 'rgba(10, 10, 26, 0.95)');
+                        document.documentElement.style.setProperty('--gradient', 'linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(10, 10, 26, 0.9) 100%)');
+                        break;
+                    case '4': // Purple and Orange
+                        document.documentElement.style.setProperty('--primary', '#9C27B0');
+                        document.documentElement.style.setProperty('--secondary', '#FF9800');
+                        document.documentElement.style.setProperty('--dark', '#1a001f');
+                        document.documentElement.style.setProperty('--light', '#ffffff');
+                        document.documentElement.style.setProperty('--gray', '#2a122f');
+                        document.documentElement.style.setProperty('--dark-gray', '#220a28');
+                        document.documentElement.style.setProperty('--accent', '#FF9800');
+                        document.documentElement.style.setProperty('--background', 'var(--dark)');
+                        document.documentElement.style.setProperty('--text', 'var(--light)');
+                        document.documentElement.style.setProperty('--card-bg', 'rgba(156, 39, 176, 0.1)');
+                        document.documentElement.style.setProperty('--header-bg', 'rgba(26, 0, 31, 0.95)');
+                        document.documentElement.style.setProperty('--gradient', 'linear-gradient(135deg, rgba(156, 39, 176, 0.2) 0%, rgba(26, 0, 31, 0.9) 100%)');
+                        break;
+                    case '5': // Red and Black
+                        document.documentElement.style.setProperty('--primary', '#F44336');
+                        document.documentElement.style.setProperty('--secondary', '#FFC107');
+                        document.documentElement.style.setProperty('--dark', '#1a0000');
+                        document.documentElement.style.setProperty('--light', '#ffffff');
+                        document.documentElement.style.setProperty('--gray', '#2a0a0a');
+                        document.documentElement.style.setProperty('--dark-gray', '#220000');
+                        document.documentElement.style.setProperty('--accent', '#FFC107');
+                        document.documentElement.style.setProperty('--background', 'var(--dark)');
+                        document.documentElement.style.setProperty('--text', 'var(--light)');
+                        document.documentElement.style.setProperty('--card-bg', 'rgba(244, 67, 54, 0.1)');
+                        document.documentElement.style.setProperty('--header-bg', 'rgba(26, 0, 0, 0.95)');
+                        document.documentElement.style.setProperty('--gradient', 'linear-gradient(135deg, rgba(244, 67, 54, 0.2) 0%, rgba(26, 0, 0, 0.9) 100%)');
+                        break;
+                    case '6': // Green and Black
+                        document.documentElement.style.setProperty('--primary', '#4CAF50');
+                        document.documentElement.style.setProperty('--secondary', '#8BC34A');
+                        document.documentElement.style.setProperty('--dark', '#001a00');
+                        document.documentElement.style.setProperty('--light', '#ffffff');
+                        document.documentElement.style.setProperty('--gray', '#0a2a0a');
+                        document.documentElement.style.setProperty('--dark-gray', '#002200');
+                        document.documentElement.style.setProperty('--accent', '#8BC34A');
+                        document.documentElement.style.setProperty('--background', 'var(--dark)');
+                        document.documentElement.style.setProperty('--text', 'var(--light)');
+                        document.documentElement.style.setProperty('--card-bg', 'rgba(76, 175, 80, 0.1)');
+                        document.documentElement.style.setProperty('--header-bg', 'rgba(0, 26, 0, 0.95)');
+                        document.documentElement.style.setProperty('--gradient', 'linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(0, 26, 0, 0.9) 100%)');
+                        break;
+                }
+                
+                // Update particles with new theme color
+                createParticles();
+            });
+        });
+
+        // Create particle animation
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            particlesContainer.innerHTML = '';
+            const particlesCount = 30;
+            
+            for (let i = 0; i < particlesCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties
+                const size = Math.random() * 10 + 2;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.background = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
         // Menu Toggle
         const menuBtn = document.getElementById('menuBtn');
         const navLinks = document.getElementById('navLinks');
@@ -1188,7 +2456,25 @@
         const nowPlaying = document.getElementById('nowPlaying');
         const closePlayer = document.getElementById('closePlayer');
         const playButtons = document.querySelectorAll('.play-btn');
+        const heroPlayBtn = document.getElementById('heroPlayBtn');
+        const visualizer = document.getElementById('visualizer');
         
+        // Hero play button
+        heroPlayBtn.addEventListener('click', () => {
+            playerTitle.textContent = "Pitamaas Lab Showreel";
+            nowPlaying.textContent = "Now Playing: Pitamaas Lab Showreel";
+            
+            playerContent.innerHTML = `
+                <div class="video-player">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/jfKfPfyJRdk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            `;
+            
+            mediaPlayer.classList.add('active');
+            visualizer.style.display = 'none';
+        });
+        
+        // Portfolio play buttons
         playButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const type = button.getAttribute('data-type');
@@ -1204,15 +2490,30 @@
                             <iframe width="100%" height="100%" src="${src}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     `;
+                    visualizer.style.display = 'none';
                 } else if (type === 'audio') {
                     playerContent.innerHTML = `
                         <div class="audio-player">
-                            <audio controls style="width: 100%">
+                            <audio controls style="width: 100%" id="audioElement">
                                 <source src="${src}" type="audio/mpeg">
                                 Your browser does not support the audio element.
                             </audio>
                         </div>
                     `;
+                    visualizer.style.display = 'flex';
+                    
+                    // Add event listener to show visualizer when audio plays
+                    setTimeout(() => {
+                        const audioElement = document.getElementById('audioElement');
+                        if (audioElement) {
+                            audioElement.addEventListener('play', () => {
+                                visualizer.style.display = 'flex';
+                            });
+                            audioElement.addEventListener('pause', () => {
+                                visualizer.style.display = 'none';
+                            });
+                        }
+                    }, 100);
                 }
                 
                 mediaPlayer.classList.add('active');
@@ -1232,6 +2533,7 @@
                     element.pause();
                 }
             });
+            visualizer.style.display = 'none';
         });
 
         // Testimonial Slider
@@ -1251,6 +2553,39 @@
         // Change testimonial every 5 seconds
         setInterval(nextTestimonial, 5000);
 
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // Stats Counter Animation
+        const statNumbers = document.querySelectorAll('.stat-number');
+        
+        function animateStats() {
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-count'));
+                const duration = 2000; // 2 seconds
+                const step = target / (duration / 16); // 16ms per frame
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        stat.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = Math.round(current);
+                    }
+                }, 16);
+            });
+        }
+
         // Scroll Animations
         function checkScroll() {
             const serviceCards = document.querySelectorAll('.service-card');
@@ -1260,6 +2595,9 @@
             const teamMembers = document.querySelectorAll('.team-member');
             const contactInfo = document.querySelector('.contact-info');
             const contactForm = document.querySelector('.contact-form');
+            const statItems = document.querySelectorAll('.stat-item');
+            const processSteps = document.querySelectorAll('.process-step');
+            const blogPosts = document.querySelectorAll('.blog-post');
             
             const triggerBottom = window.innerHeight * 0.8;
             
@@ -1299,10 +2637,41 @@
                     contactForm.classList.add('show');
                 }
             }
+            
+            statItems.forEach(stat => {
+                const statTop = stat.getBoundingClientRect().top;
+                if (statTop < triggerBottom) {
+                    stat.classList.add('show');
+                }
+            });
+            
+            processSteps.forEach(step => {
+                const stepTop = step.getBoundingClientRect().top;
+                if (stepTop < triggerBottom) {
+                    step.classList.add('show');
+                }
+            });
+            
+            blogPosts.forEach(post => {
+                const postTop = post.getBoundingClientRect().top;
+                if (postTop < triggerBottom) {
+                    post.classList.add('show');
+                }
+            });
+            
+            // Animate stats when they come into view
+            const statsSection = document.querySelector('.stats');
+            if (statsSection) {
+                const statsTop = statsSection.getBoundingClientRect().top;
+                if (statsTop < triggerBottom) {
+                    animateStats();
+                }
+            }
         }
 
         window.addEventListener('scroll', checkScroll);
         window.addEventListener('load', checkScroll);
+        window.addEventListener('load', createParticles);
 
         // Smooth Scrolling for Anchor Links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
